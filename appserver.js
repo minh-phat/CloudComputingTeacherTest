@@ -5,6 +5,11 @@ const router = express.Router();
 const fs = require("fs");
 
 // ------------------- Routing
+router.use( "/" , (yeucau, trave, ketiep) => {
+   console.log("REQ: ", Date.now()); 
+   ketiep();
+});
+
 router.get( "/" , (yeucau, trave) => {
     data = fs.readFileSync("./html/main.html");
     pageContent = data.toString();
