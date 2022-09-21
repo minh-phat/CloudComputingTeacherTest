@@ -14,6 +14,7 @@ router.use((yeucau, trave, ketiep) => {
 });
 
 router.get( "/" , (yeucau, trave) => {
+    appServer.use(express.static(__dirname + '/public')); //link css
     data = fs.readFileSync("./html/main.html");
     pageContent = data.toString();
     trave.send(pageContent);
