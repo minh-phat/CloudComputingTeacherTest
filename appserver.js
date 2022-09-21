@@ -29,16 +29,21 @@ router.get( "/products" , (yeucau, trave) => {
 });
 
 router.get( "/login" , (yeucau, trave) => {
-    appServer.use(express.static(__dirname + '/public'));
+    appServer.use(express.static(__dirname + '/public')); //link css
     data = fs.readFileSync("./view/login.html");
     pageContent = data.toString();
     trave.send(pageContent);
 });
 
-
+appServer.use(bodyParser.json());
 // -------------------------
 appServer.use("/", router);
-// ----------- RUN / Launching !!! 
+// ----------- RUN / Launching !!!
+
+const productRouter = require("./controller/productController");
+appServer.use("/products", productRouter);
+// ----------- RUN / productRouter in controller !!! 
+
 appServer.listen( PORT );
 
 console.log("Web da mo tai " + PORT);
