@@ -4,6 +4,9 @@ const appServer = express();
 const router = express.Router();
 const fs = require("fs");
 
+const bodyParser = require('body-parser');
+
+
 // ------------------- Routing
 router.use((yeucau, trave, ketiep) => {
    console.log("REQ: ", Date.now()); 
@@ -35,12 +38,19 @@ router.get( "/login" , (yeucau, trave) => {
     trave.send(pageContent);
 });
 
+//---------------midleware---------
 appServer.use(bodyParser.json());
+/* appServer.use(session({secret: 'some secrets'})); */
 // -------------------------
+
+//------------------config
+appServer.use(express.static(__dirname + '/public')); //link css
+//---------------------
+
 appServer.use("/", router);
 // ----------- RUN / Launching !!!
 
-const productRouter = require("./controller/productController");
+const productRouter = require("./controller/productController.js").productRouter;
 appServer.use("/products", productRouter);
 // ----------- RUN / productRouter in controller !!! 
 
