@@ -6,6 +6,9 @@ const fs = require("fs");
 
 const bodyParser = require('body-parser');
 
+//------------------config
+appServer.use(express.static('public')); //link css
+//---------------------
 
 // ------------------- Routing
 router.use((yeucau, trave, ketiep) => {
@@ -14,14 +17,13 @@ router.use((yeucau, trave, ketiep) => {
 });
 
 router.get( "/" , (yeucau, trave) => {
-    appServer.use(express.static(__dirname + '/public')); //link css
     data = fs.readFileSync("./html/main.html");
     pageContent = data.toString();
     trave.send(pageContent);
 });
 
 router.get( "/home" , (yeucau, trave) => {
-    appServer.use(express.static(__dirname + '/public')); //link css
+    
     data = fs.readFileSync("./html/home.html");
     pageContent = data.toString();
     trave.send(pageContent);
@@ -45,9 +47,7 @@ appServer.use(bodyParser.json());
 /* appServer.use(session({secret: 'some secrets'})); */
 // -------------------------
 
-//------------------config
-appServer.use(express.static('public')); //link css
-//---------------------
+
 
 appServer.use("/", router);
 // ----------- RUN / Launching !!!
