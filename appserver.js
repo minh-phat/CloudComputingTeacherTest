@@ -44,7 +44,7 @@ appServer.use(bodyParser.json());
 // -------------------------
 
 //------------------config
-appServer.use(express.static(__dirname + '/public')); //link css
+appServer.use(express.static('public')); //link css
 //---------------------
 
 appServer.use("/", router);
