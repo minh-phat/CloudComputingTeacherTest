@@ -5,7 +5,7 @@ const router = express.Router();
 const fs = require("fs");
 
 // ------------------- Routing
-router.use( "/" , (yeucau, trave, ketiep) => {
+router.use((yeucau, trave, ketiep) => {
    console.log("REQ: ", Date.now()); 
    ketiep();
 });
@@ -24,6 +24,12 @@ router.get( "/home" , (yeucau, trave) => {
 
 router.get( "/products" , (yeucau, trave) => {
     data = fs.readFileSync("./html/products.html");
+    pageContent = data.toString();
+    trave.send(pageContent);
+});
+
+router.get( "/login" , (yeucau, trave) => {
+    data = fs.readFileSync("./view/login.html");
     pageContent = data.toString();
     trave.send(pageContent);
 });
