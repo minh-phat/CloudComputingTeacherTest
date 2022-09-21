@@ -20,6 +20,7 @@ router.get( "/" , (yeucau, trave) => {
 });
 
 router.get( "/home" , (yeucau, trave) => {
+    appServer.use(express.static(__dirname + '/public')); //link css
     data = fs.readFileSync("./html/home.html");
     pageContent = data.toString();
     trave.send(pageContent);
