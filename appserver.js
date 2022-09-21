@@ -29,6 +29,7 @@ router.get( "/products" , (yeucau, trave) => {
 });
 
 router.get( "/login" , (yeucau, trave) => {
+    appServer.use(express.static(__dirname + '/public'));
     data = fs.readFileSync("./view/login.html");
     pageContent = data.toString();
     trave.send(pageContent);
